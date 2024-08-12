@@ -1,0 +1,18 @@
+---
+- name: Create dockge container
+  community.docker.docker_container:
+    name: dockge
+    image: louislam/dockge:1
+    pull: true
+    state: started
+    env:
+      "DOCKGE_STACKS_DIR": "/opt/stacks"
+    ports:
+      - "5001:5001/tcp"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "{{ dockge_dir }}/data:/app/data"
+      - "{{ dockge_dir }}/stacks:/opt/stacks"
+    restart_policy: unless-stopped
+    networks:
+      - name: homelab
