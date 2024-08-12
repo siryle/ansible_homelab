@@ -46,6 +46,10 @@
   ansible.builtin.package:
     name: "{{ packages }}"
     state: present
+    
+- name: Move EXTERNALLY-MANAGED
+  ansible.builtin.command: 
+    cmd: mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED.bk
 
 - name: Install pip packages
   ansible.builtin.pip:
