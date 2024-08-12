@@ -1,0 +1,12 @@
+[global]
+        workgroup = SAMBA
+        security = user
+
+        passdb backend = tdbsam
+
+        smb encrypt = required
+        server min protocol = SMB3
+
+[homelab]
+        path = {{ data_dir }}
+        write list = @{{ samba_user }}

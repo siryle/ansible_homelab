@@ -1,0 +1,36 @@
+---
+- name: 复制Samba配置文件
+  template:
+    src: samba.conf.j2
+    dest: /etc/samba/smb.conf
+
+- name: 启动Samba服务并设置开机自启
+  systemd:
+    name: smbd
+    state: started
+    enabled: yes
+
+- name: 创建Samba系统用户
+  user:
+    name: "{{ samba_user }}"
+    createhome: no
+    shell: /bin/false
+    state: present
+
+- name: 设置Samba用户密码
+  command: smbpasswd -s -a {{ samba_user }}
+  args:
+    stdin: "{{ samba_pass }}\n{{ samba_pass }}"
+
+- name: 创建Samba共享目录并设置权限
+  file:
+    path: "{{ data_dir }}"
+    state: directory
+    owner: "{{ samba_user }}"
+    group: "{{ samba_user }}"
+    mode: "0775"
+
+- name: 重启Samba服务以应用配置更改
+  systemd:
+    name: smbd
+    state: restarted
