@@ -1,4 +1,9 @@
 ---
+- name: Copy dockge compose file from template
+  ansible.builtin.template:
+    src: dockge_compose.j2
+    dest: "{{ dockge_dir }}/compose.yaml"
+
 - name: Create dockge container
   community.docker.docker_container:
     name: dockge

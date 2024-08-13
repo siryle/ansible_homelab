@@ -8,5 +8,5 @@
     group: "{{ username }}"
     mode: "0755"
   loop: 
-    - "{{ data_dir }}"
+    - "{{ storage_dir }}"
     - "{{ dockge_dir }}"

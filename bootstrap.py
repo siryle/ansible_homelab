@@ -10,8 +10,6 @@ os.chdir('ansible_homelab')
 
 # Read user input
 username = input("Enter username: ")
-puid = input("Enter puid of the user: ")
-pgid = input("Enter pgid of the user: ")
 samba_user = input("Enter username of samba: ")
 samba_pass = input("Enter password of samba: ")
 server_ip = input("Enter server IP address: ")
@@ -22,8 +20,6 @@ with open('group_vars/all/vars.yml', 'r') as f:
     content = f.read()
 content = content.replace('<username>', username)
 content = content.replace('<server_ip>', server_ip)
-content = content.replace('<puid>', puid)
-content = content.replace('<pgid>', pgid)
 content = content.replace('<samba_user>', samba_user)
 content = content.replace('<samba_pass>', samba_pass)
 with open('group_vars/all/vars.yml', 'w') as f:

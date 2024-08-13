@@ -2,11 +2,7 @@
 username: "<username>"
 
 dockge_dir: /mnt/storage/appdata/dockge
-data_dir: /mnt/storage
-
-puid: "<puid>"
-
-pgid: "<pgid>"
+storage_dir: /mnt/storage
 
 ip_address: "<server_ip>"
 
@@ -45,5 +41,3 @@ mount_disks:
     path: "/mnt/disk1"
   - src: "LABEL=wd16t2"
     path: "/mnt/disk2"
-
-storage_dir: "/mnt/storage"

@@ -7,8 +7,7 @@
     opts: noatime,defaults,nofail
     passno: 2
     state: mounted
-  loop:
-    - "{{ mount_disks }}"
+  loop: "{{ mount_disks }}"
 
 - name: Create storage directory
   ansible.builtin.file:
@@ -17,17 +16,14 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: "0755"
-  
-- name: Mount disks using mergerfs
-  ansible.builtin.shell: mergerfs /mnt/disk* /mnt/storage
-    args:
-      creates: /mnt/storage
 
-- name: Ensure SELinux is set to enforcing mode
+- name: Add mergerfs mount into fstab
   ansible.builtin.lineinfile:
     path: /etc/fstab
     line: "/mnt/disk* /mnt/storage fuse.mergerfs defaults,allow_other,minfreespace=10G,fsname=mergerfs,ignorepponrename=true 0 0"
     state: present
     create: no
-    backrefs: yes
-    backref_regex: "\\n"
+
+- name: Reboot 
+  ansible.builtin.reboot:
+    msg: Rebooting due to mergerfs mount
