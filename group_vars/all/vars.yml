@@ -23,6 +23,7 @@ packages:
   - python3
   - python3-pip
   - samba
+  - mergerfs
 
 pip_packages:
   - ansible
@@ -42,16 +43,9 @@ docker_packages:
   - docker-compose-plugin
 
 mount_disks:
-  - src: "LABEL=black"
+  - src: "LABEL=wd16t1"
     path: "/mnt/disk1"
-  - src: "LABEL=nvme_old"
+  - src: "LABEL=wd16t2"
     path: "/mnt/disk2"
-  - src: "LABEL=t5"
-    path: "/mnt/disk3"
 
-  - src: "LABEL=book"
-    path: "/mnt/media"
-  - src: "LABEL=other"
-    path: "/mnt/others"
-  - src: "LABEL=4tb"
-    path: "/mnt/backup"
+storage_dir: "/mnt/storage"

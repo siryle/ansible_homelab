@@ -1,3 +1,4 @@
+---
 - name: Mount the drives
   ansible.posix.mount:
     src: "{{ item.src }}"
@@ -8,3 +9,25 @@
     state: mounted
   loop:
     - "{{ mount_disks }}"
+
+- name: Create storage directory
+  ansible.builtin.file:
+    path: "{{ storage_dir }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
+  
+- name: Mount disks using mergerfs
+  ansible.builtin.shell: mergerfs /mnt/disk* /mnt/storage
+    args:
+      creates: /mnt/storage
+
+- name: Ensure SELinux is set to enforcing mode
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    line: "/mnt/disk* /mnt/storage fuse.mergerfs defaults,allow_other,minfreespace=10G,fsname=mergerfs,ignorepponrename=true 0 0"
+    state: present
+    create: no
+    backrefs: yes
+    backref_regex: "\\n"
