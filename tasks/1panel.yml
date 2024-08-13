@@ -1,3 +1,17 @@
 ---
 - name: Install 1panel
-  ansible.builtin.command: curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh && bash quick_start.sh
+  ansible.builtin.shell: curl -sSL https://resource.fit2cloud.com/1panel/package/quick_start.sh -o quick_start.sh && bash quick_start.sh
+- name: Update username
+  ansible.builtin.shell: 1pctl update username
+  args:
+    stdin: "{{ username }}"
+- name: Update password
+  ansible.builtin.shell: 1pctl update password
+  args:
+    stdin: "{{ password }}"
+- name: Update port
+  ansible.builtin.shell: 1pctl update port
+  args:
+    stdin: "80"
+- name: Reset entrance
+  ansible.builtin.shell: 1pctl reset entrance
