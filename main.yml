@@ -27,3 +27,4 @@
     - name: Reboot the server
       ansible.builtin.reboot:
         msg: "Rebooting server to finish setup"
+        reboot_timeout: 180
