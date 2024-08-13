@@ -16,13 +16,13 @@
     - name: Install docker
       ansible.builtin.include_tasks: tasks/docker.yml
 
-    - name: Modify ownership of data and docker_apps directories
-      ansible.builtin.include_tasks: tasks/add_ownership.yml
-
     - name: Deploy docker apps
       ansible.builtin.include_tasks: "tasks/{{ item }}.yml"
       loop:
         - dockge
+
+    - name: Modify ownership of data and docker_apps directories
+      ansible.builtin.include_tasks: tasks/add_ownership.yml
 
     - name: Reboot the server
       ansible.builtin.reboot:

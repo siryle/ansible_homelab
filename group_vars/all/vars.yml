@@ -1,13 +1,8 @@
 ---
 username: "<username>"
-
-dockge_dir: /mnt/storage/appdata/dockge
-storage_dir: /mnt/storage
-
+password: "<password>"
 ip_address: "<server_ip>"
-
-samba_user: "<samba_user>"
-samba_pass: "<samba_pass>"
+storage_dir: /mnt/storage
 
 packages:
   - unzip

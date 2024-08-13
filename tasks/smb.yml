@@ -12,17 +12,17 @@
 
 - name: Creat Samba user
   ansible.builtin.user:
-    name: "{{ samba_user }}"
+    name: "{{ username }}"
     createhome: no
     shell: /bin/false
     state: present
 
 - name: Set Samba password
-  ansible.builtin.command: smbpasswd -s -a {{ samba_user }}
+  ansible.builtin.command: smbpasswd -s -a {{ username }}
   args:
-    stdin: "{{ samba_pass }}\n{{ samba_pass }}"
+    stdin: "{{ password }}\n{{ password }}"
 
-- name: 重启Samba服务以应用配置更改
+- name: Restart Samba service
   ansible.builtin.systemd:
     name: smbd
     state: restarted

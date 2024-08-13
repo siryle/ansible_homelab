@@ -10,18 +10,15 @@ os.chdir('ansible_homelab')
 
 # Read user input
 username = input("Enter username: ")
-samba_user = input("Enter username of samba: ")
-samba_pass = input("Enter password of samba: ")
+password = input("Enter password: ")
 server_ip = input("Enter server IP address: ")
-use_password = input("Are you using a password instead of SSH keys? [y/n]: ")
 
 # Replace values in vars.yml file
 with open('group_vars/all/vars.yml', 'r') as f:
     content = f.read()
 content = content.replace('<username>', username)
 content = content.replace('<server_ip>', server_ip)
-content = content.replace('<samba_user>', samba_user)
-content = content.replace('<samba_pass>', samba_pass)
+content = content.replace('<password>', password)
 with open('group_vars/all/vars.yml', 'w') as f:
     f.write(content)
 
@@ -30,16 +27,9 @@ with open('inventory', 'r') as f:
     content = f.read()
 content = content.replace('<server_ip>', server_ip)
 content = content.replace('<username>', username)
-if use_password == 'y':
-    ssh_password = input("Enter SSH password: ")
-    content = content.replace(
-        'ansible_ssh_private_key_file = <path/to/private/key>', '')
-    content += f'ansible_ssh_pass = {ssh_password}\n'
-else:
-    private_key_path = input("Enter path to private key: ")
-    content = content.replace('<path/to/private/key>', private_key_path)
+content = content.replace('<password>', password)
 with open('inventory', 'w') as f:
     f.write(content)
 
 # Run the playbook
-subprocess.run(['ansible-playbook', 'main.yml'])
+# subprocess.run(['ansible-playbook', 'main.yml'])
