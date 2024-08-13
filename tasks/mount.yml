@@ -1,0 +1,10 @@
+- name: Mount the drives
+  ansible.posix.mount:
+    src: "{{ item.src }}"
+    path: "{{ item.path }}"
+    fstype: ext4
+    opts: noatime,defaults,nofail
+    passno: 2
+    state: mounted
+  loop:
+    - "{{ mount_disks }}"

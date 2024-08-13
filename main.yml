@@ -7,6 +7,12 @@
     - name: Update server and install essential packages
       ansible.builtin.include_tasks: tasks/essential.yml
 
+    - name: Mount disks
+      ansible.builtin.include_tasks: tasks/mount.yml
+
+    - name: Deploy smb server
+      ansible.builtin.include_tasks: tasks/smb.yml
+
     - name: Install docker
       ansible.builtin.include_tasks: tasks/docker.yml
 

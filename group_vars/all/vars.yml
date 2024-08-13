@@ -40,3 +40,18 @@ docker_packages:
   - containerd.io
   - docker-buildx-plugin
   - docker-compose-plugin
+
+mount_disks:
+  - src: "LABEL=black"
+    path: "/mnt/disk1"
+  - src: "LABEL=nvme_old"
+    path: "/mnt/disk2"
+  - src: "LABEL=t5"
+    path: "/mnt/disk3"
+
+  - src: "LABEL=book"
+    path: "/mnt/media"
+  - src: "LABEL=other"
+    path: "/mnt/others"
+  - src: "LABEL=4tb"
+    path: "/mnt/backup"
