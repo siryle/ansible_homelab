@@ -10,8 +10,6 @@ pgid: "<pgid>"
 
 ip_address: "<server_ip>"
 
-timezone: "<timezone>"
-
 samba_user: "<samba_user>"
 samba_pass: "<samba_pass>"
 
