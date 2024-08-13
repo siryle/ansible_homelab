@@ -32,7 +32,7 @@ docker_packages:
   - docker-compose-plugin
 
 mount_disks:
-  - src: "LABEL=wd16t1"
+  - src: "LABEL=px256"
     path: "/mnt/disk1"
   - src: "LABEL=wd16t2"
     path: "/mnt/disk2"

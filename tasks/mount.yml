@@ -9,14 +9,6 @@
     state: mounted
   loop: "{{ mount_disks }}"
 
-- name: Create storage directory
-  ansible.builtin.file:
-    path: "{{ storage_dir }}"
-    state: directory
-    owner: "{{ username }}"
-    group: "{{ username }}"
-    mode: "0755"
-
 - name: Add mergerfs mount into fstab
   ansible.builtin.lineinfile:
     path: /etc/fstab

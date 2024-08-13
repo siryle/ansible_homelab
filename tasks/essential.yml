@@ -43,6 +43,14 @@
     name: "{{ pip_packages }}"
     state: present
 
+- name: Create storage directory
+  ansible.builtin.file:
+    path: "{{ storage_dir }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: "0755"
+
 - name: Suppress login messages
   ansible.builtin.file:
     name: /home/{{ username }}/.hushlogin
