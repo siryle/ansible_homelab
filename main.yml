@@ -24,6 +24,9 @@
     - name: Modify ownership of data and docker_apps directories
       ansible.builtin.include_tasks: tasks/add_ownership.yml
 
+    - name: Install docker
+      ansible.builtin.include_tasks: tasks/1panel.yml
+
     - name: Reboot the server
       ansible.builtin.reboot:
         msg: "Rebooting server to finish setup"
