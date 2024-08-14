@@ -8,7 +8,7 @@
 - name: Update password
   ansible.builtin.shell: 1pctl update password
   args:
-    stdin: "{{ password }}"
+    stdin: "{{ password }}\n{{ password }}"
 - name: Update port
   ansible.builtin.shell: 1pctl update port
   args:

@@ -1,0 +1,24 @@
+---
+- name: Install mdserver-web
+  ansible.builtin.shell: curl --insecure -fsSL https://cdn.jsdelivr.net/gh/midoks/mdserver-web@latest/scripts/install.sh | bash
+
+- name: Edit mdserver-web cli
+  ansible.builtin.shell: |
+    sed -i 's/if len(username) < 5/if len(username) < 3/g' /www/server/mdserver-web/tools.py
+    sed -i 's/用户名长度不能少于5位/用户名长度不能少于3位/g' /www/server/mdserver-web/tools.py
+    sed -i "s/'admin', 'root'/'a'/g" /www/server/mdserver-web/tools.py
+
+- name: Update username
+  ansible.builtin.shell: mw 12
+  args:
+    stdin: "{{ username }}"
+- name: Update password
+  ansible.builtin.shell: mw 11
+  args:
+    stdin: "{{ password }}"
+- name: Update port
+  ansible.builtin.shell: mw 5
+  args:
+    stdin: "80"
+- name: Close admin path
+  ansible.builtin.shell: mw close_admin_path
